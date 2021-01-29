@@ -3,21 +3,23 @@ package nettytest.server.handler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 
 import java.nio.charset.StandardCharsets;
 
-public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+public class HttpServerHandler extends ChannelInboundHandlerAdapter {
     private HttpRequest request;
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, HttpObject msg) throws Exception {
+    public void channelRead(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
         if (msg instanceof HttpRequest) {
             request = (HttpRequest) msg;
             request.method();
             String uri = request.uri();
             System.out.println("Uri:" + uri);
             channelHandlerContext.fireChannelRead(msg);
+            throw new ArrayIndexOutOfBoundsException("发生异常");
         }
 
         if (msg instanceof HttpContent) {

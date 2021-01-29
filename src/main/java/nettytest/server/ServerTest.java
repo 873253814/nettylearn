@@ -75,25 +75,4 @@ public class ServerTest {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
     }
-
-
-//    public static void main(String[] args) {
-//        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
-//        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-//
-//        try {
-//            ServerBootstrap bootstrap = new ServerBootstrap();
-//
-//            bootstrap.group(bossGroup, workerGroup)
-//                    .channel(NioServerSocketChannel.class)
-//                    .childHandler(new HttpServerInitializer());
-//            ChannelFuture future = bootstrap.bind(8080).sync();
-//            future.channel().closeFuture().sync();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } finally {
-//            bossGroup.shutdownGracefully();
-//            workerGroup.shutdownGracefully();
-//        }
-//    }
 }

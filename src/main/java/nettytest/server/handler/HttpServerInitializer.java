@@ -12,10 +12,12 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast("httpServerCodec", new HttpServerCodec());
-        pipeline.addLast("httpServerHandler", new HttpServerHandler())
+        pipeline.addLast("httpServerCodec", new HttpServerCodec())
+                .addLast("httpServerHandler", new HttpServerHandler())
                 .addLast("httpServerInfoHandler", new HttpServerInfoHandler())
-                .addLast("httpServerOutHandler", new HttpServerOutHandler())
-                .addLast("httpServerOutInfoHandler", new HttpServerOutInfoHandler());
+                .addLast("httpServerPrintHandler", new HttpServerPrintHandler())
+                .addLast("HttpOutBoundHandler", new HttpServerOutHandler())
+                .addLast("HttpOutBoundInfoHandler", new HttpServerOutInfoHandler())
+                .addLast("exceptionCaughtHandler", new ExceptionCaughtHandler());
     }
 }
