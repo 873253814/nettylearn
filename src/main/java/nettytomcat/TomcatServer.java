@@ -27,7 +27,7 @@ public class TomcatServer {
 
     // 启动tomcat
     public void start() throws Exception {
-        // 加载指定包中的所有ServerNet的类名（尚未实现）
+        // 加载指定包中的所有ServerNet的类名
         cacheClassName(basePackage);
         // 启动server服务
         runServer();
@@ -36,7 +36,7 @@ public class TomcatServer {
     private void cacheClassName(String basePackage) {
         // 获取指定包中的资源
         URL resource = OneServerNet.class
-                .getResource("");
+                .getResource(basePackage);
         // 若目录中没有任何资源，则直接结束
         if (resource == null) {
             return;

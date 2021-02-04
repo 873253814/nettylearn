@@ -27,7 +27,7 @@ public class TomcatHandler extends ChannelInboundHandlerAdapter {
                 serverNet = nameToServerNetMap.get(serverNetName);
             } else if (nameToClassNameMap.containsKey(serverNetName)) {
                 // double-check，双重检测锁
-                // 当读到消息的时候根据请求获取对应的Servnet
+                // 当读到消息的时候根据请求获取对应的ServerNet
                 // 如果不存在创建的时候用双重检查锁，避免线程安全问题
                 if (nameToServerNetMap.get(serverNetName) == null) {
                     synchronized (this) {
@@ -43,7 +43,7 @@ public class TomcatHandler extends ChannelInboundHandlerAdapter {
                 }
             } //  end-else if
 
-            // 代码走到这里，servnet肯定不空
+            // 代码走到这里，serverNet肯定不空
             INettyRequest req = new DefaultNettyRequest(request);
             INettyResponse res = new DefaultNettyResponse(request, ctx);
             // 根据不同的请求类型，调用serverNet实例的不同方法

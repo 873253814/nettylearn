@@ -42,7 +42,7 @@ public class DefaultNettyRequest implements INettyRequest{
     @Override
     public String getParameter(String name) {
         List<String> parameters = getParameters(name);
-        if (parameters.isEmpty() || parameters == null) {
+        if (parameters == null || parameters.isEmpty()) {
             return null;
         }
         return parameters.get(0);
