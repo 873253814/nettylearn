@@ -5,9 +5,13 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
+import java.util.Date;
+
 @Component
 public class HttpClientHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
 
@@ -30,6 +34,17 @@ public class HttpClientHandler extends SimpleChannelInboundHandler<FullHttpRespo
         response.headers().get(HttpHeaderNames.CONTENT_TYPE);
         ByteBuf buf = response.content();
         System.out.println(buf.toString(io.netty.util.CharsetUtil.UTF_8));
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("客户端循环心跳监测发送: "+new Date());
+        if (evt instanceof IdleStateEvent){
+            IdleStateEvent event = (IdleStateEvent)evt;
+            if (event.state()== IdleState.WRITER_IDLE){
+                ctx.writeAndFlush("biubiu");
+            }
+        }
     }
 
 }

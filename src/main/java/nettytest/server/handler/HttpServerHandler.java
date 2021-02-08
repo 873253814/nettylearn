@@ -13,13 +13,13 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
     private HttpRequest request;
     @Override
     public void channelRead(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
+        channelHandlerContext.fireUserEventTriggered(new ChannelReadEvent(msg.toString()));
         if (msg instanceof HttpRequest) {
             request = (HttpRequest) msg;
             request.method();
             String uri = request.uri();
             System.out.println("Uri:" + uri);
             channelHandlerContext.fireChannelRead(msg);
-            throw new ArrayIndexOutOfBoundsException("发生异常");
         }
 
         if (msg instanceof HttpContent) {

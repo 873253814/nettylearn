@@ -13,10 +13,6 @@ public class HttpServerOutInfoHandler extends ChannelOutboundHandlerAdapter {
         ctx.write(msg, promise);
     }
 
-//    @Override
-//    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-//        ctx.channel().write("Hello World 2222");
-//    }
 
     @Override
     @SuppressWarnings("deprecation")
