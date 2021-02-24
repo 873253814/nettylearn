@@ -38,6 +38,9 @@ public class HttpClientHandler extends SimpleChannelInboundHandler<FullHttpRespo
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("hello");
+        System.out.println("wqjiee");
+        System.out.println("asdasdsadsda");
         System.out.println("客户端循环心跳监测发送: "+new Date());
         if (evt instanceof IdleStateEvent){
             IdleStateEvent event = (IdleStateEvent)evt;
